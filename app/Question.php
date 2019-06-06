@@ -21,4 +21,9 @@ class Question extends Model
 
         $this->attributes['slug']= Str::slug($value, '-');
     }
+
+    public function getUrlAttribute()
+    {
+        return route("questions.show", $this->id);
+    }
 }
