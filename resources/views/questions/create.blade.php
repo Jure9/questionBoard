@@ -11,8 +11,6 @@
 
                             <h2>Ask a Question</h2>
 
-                            @include('errors')
-
 
                             <div class="ml-auto">
                                 <a href="{{ route('questions.index') }}" class="btn btn-secondary">Back to all the Questions</a>
@@ -21,6 +19,8 @@
                         </div>
 
                     </div>
+
+                    @include('errors')
 
                     <div class="card-body">
 
@@ -31,7 +31,7 @@
                             <div class="form-group">
 
                                 <label for="question-title">Question Title</label>
-                                <input type="text" name="title" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
+                                <input type="text" name="title" value="{{ old('title') }}" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
 
                             </div>
 
@@ -39,6 +39,7 @@
 
                                 <label for="question-body">Question</label>
                                 <textarea name="body" id="question-body" cols="30" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">
+                                    {{ old('body') }}
                                 </textarea>
 
                             </div>

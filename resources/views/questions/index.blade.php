@@ -21,7 +21,10 @@
 
                     <div class="card-body">
 
-                        @foreach($questions as $question)
+                        @include('messages')
+
+
+                    @foreach($questions as $question)
 
                             <div class="media">
 

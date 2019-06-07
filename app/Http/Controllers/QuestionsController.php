@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestion;
 use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,12 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only('create');
+    }
+
     public function index()
     {
 
@@ -45,9 +52,14 @@ class QuestionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuestion $request)
     {
-        //
+//        $validated = $request->validated();
+
+        $request->user()->questions()->create($request->all());
+
+//        auth()->user()->questions()->create($validated);
+        return redirect('questions')->with('success', 'Your question has been submited');
     }
 
     /**
