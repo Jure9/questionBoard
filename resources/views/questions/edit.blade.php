@@ -9,7 +9,7 @@
 
                         <div class="d-flex align-items-center">
 
-                            <h2>Ask a Question</h2>
+                            <h2>Edit Question</h2>
 
 
                             <div class="ml-auto">
@@ -24,9 +24,11 @@
 
                     <div class="card-body">
 
-                        <form action="/questions" method="post">
+                        <form action="/questions/{{$question->id}}" method="post">
 
-                           @include("questions._form", ['buttonText' => 'Ask a Question'])
+                            @method('PATCH')
+
+                            @include("questions._form", ['buttonText' => 'Update Question'])
 
                         </form>
 
