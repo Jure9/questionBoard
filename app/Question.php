@@ -10,10 +10,10 @@ class Question extends Model
 
     protected $fillable= ['title', 'body'];
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+//    public function getRouteKeyName()
+//    {
+//        return 'slug';
+//    }
 
     public function user()
     {
