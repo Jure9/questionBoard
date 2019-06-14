@@ -35,7 +35,7 @@
                                     </div>
 
                                     <div class="status {{ $question->status }}">
-                                        <strong>{{ $question->answers }}</strong> {{ Str::plural('answer', $question->answer) }}
+                                        <strong>{{ $question->answers_count }}</strong> {{ Str::plural('answer', $question->answer) }}
                                     </div>
 
                                     <div class="view">
@@ -51,29 +51,33 @@
                                         </h3>
                                         <div class="ml-auto">
 
-                                            @if(Auth::user()->can('update-question', $question))
+                                            @auth
 
-                                                <a href="{{ route('questions.edit', $question->id) }}"
-                                                   class="btn btn-sm btn-outline-info">Edit</a>
+                                                @if(Auth::user()->can('update-question', $question))
 
-                                            @endif
+                                                    <a href="{{ route('questions.edit', $question->id) }}"
+                                                       class="btn btn-sm btn-outline-info">Edit</a>
 
-                                            @if(Auth::user()->can('delete-question', $question))
+                                                @endif
 
-                                                <form class="form-delete" method="post"
-                                                      action="/questions/{{ $question->id }}">
+                                                @if(Auth::user()->can('delete-question', $question))
 
-                                                    @method('DELETE')
+                                                    <form class="form-delete" method="post"
+                                                          action="/questions/{{ $question->id }}">
 
-                                                    @csrf
+                                                        @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                            onclick="return confirm('Are you sure?')">Delete
-                                                    </button>
+                                                        @csrf
 
-                                                </form>
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                                onclick="return confirm('Are you sure?')">Delete
+                                                        </button>
 
-                                            @endif
+                                                    </form>
+
+                                                @endif
+
+                                            @endauth
 
                                         </div>
                                     </div>
