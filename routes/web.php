@@ -21,4 +21,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('questions', 'QuestionsController')->except('show');
 
+//Route::resource('answers', 'AnswersController');
+
+Route::post('questions/{question}/answers', 'AnswersController@store');
+
+Route::get('questions/{question}/answers/edit', 'AnswersController@edit');
+
+Route::patch('questions/{question}/answers', 'AnswersController@update');
+
+Route::delete('questions/{question}/answers/{answer}', 'AnswersController@destroy');
+
 Route::get('questions/{slug}', 'QuestionsController@show')->name('questions.show');

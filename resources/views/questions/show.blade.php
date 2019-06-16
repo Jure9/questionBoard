@@ -73,5 +73,6 @@
         'answersCount' => $question->answers_count
         ])
 
+        @include('answers._create')
     </div>
 @endsection
