@@ -25,10 +25,10 @@ Route::resource('questions', 'QuestionsController')->except('show');
 
 Route::post('questions/{question}/answers', 'AnswersController@store');
 
-Route::get('questions/{question}/answers/edit', 'AnswersController@edit');
+Route::get('questions/{question}/answers/{answer}/edit', 'AnswersController@edit')->name('questions.answers.edit');
 
-Route::patch('questions/{question}/answers', 'AnswersController@update');
+Route::patch('questions/{question}/answers/{answer}', 'AnswersController@update');
 
-Route::delete('questions/{question}/answers/{answer}', 'AnswersController@destroy');
+Route::delete('questions/{question}/answers/{answer}', 'AnswersController@destroy')->name('questions.answers.destroy');
 
 Route::get('questions/{slug}', 'QuestionsController@show')->name('questions.show');
