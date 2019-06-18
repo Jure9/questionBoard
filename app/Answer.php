@@ -39,4 +39,9 @@ class Answer extends Model
         });
 
     }
+
+    public function getStatusAttribute()
+    {
+        return $this->id == $this->question->best_answer_id ? 'vote-acepted' : '';
+    }
 }
