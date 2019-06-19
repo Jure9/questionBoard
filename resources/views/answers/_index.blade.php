@@ -23,9 +23,31 @@
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
 
-                            <a title="Mark this answer as best" class="{{ $answer->status }} mt-2">
-                                <i class="fas fa-check fa-2x"></i>
-                            </a>
+                            @can('acceptBest', $answer)
+                                <a title="Mark this answer as best"
+                                   class="{{ $answer->status }} mt-2"
+                                   onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
+                                >
+                                    <i class="fas fa-check fa-2x"></i>
+                                </a>
+                                <form action="/answers/{{ $answer->id }}/accept"
+                                      id="accept-answer-{{ $answer->id }}" method="post" style="display: none">
+
+                                    @csrf
+
+                                </form>
+
+                            @else
+
+                                @if($answer->is_best)
+
+                                    <a title="Mark this answer as best"
+                                       class="{{ $answer->status }} mt-2">
+                                        <i class="fas fa-check fa-2x"></i>
+
+                                @endif
+
+                            @endcan
                         </div>
 
                         <div class="media-body">
@@ -41,10 +63,14 @@
                                         @endcan
                                         @can('delete', $answer)
 
-                                            <form class=" form-delete" method="post" action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}">
+                                            <form class=" form-delete" method="post"
+                                                  action="{{ route('questions.answers.destroy', [$question->id, $answer->id]) }}">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete your answer?')">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                        onclick="return confirm('Are you sure you want to delete your answer?')">
+                                                    Delete
+                                                </button>
                                             </form>
 
                                         @endcan
