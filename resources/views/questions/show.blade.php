@@ -12,7 +12,7 @@
 
                             <div class="d-flex align-items-center">
 
-                                <h1 >{{ $question->title }}</h1>
+                                <h1>{{ $question->title }}</h1>
 
 
                                 <div class="ml-auto">
@@ -29,7 +29,7 @@
                         <div class="media">
 
                             <div class="d-flex flex-column vote-controls">
-                                <a title="" class="vote-up">
+                                <a title="This question is useful" class="vote-up">
                                     <i class="fas fa-caret-up fa-3x"></i>
 
                                 </a>
@@ -38,10 +38,26 @@
                                     <i class="fas fa-caret-down fa-3x"></i>
                                 </a>
 
-                                <a title="Click to mark as favourite question" class="favourite mt-2 favourited">
+                                <a title="Click to mark as favourite question"
+                                   class="favourite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favourited ? 'favourited' : '') }}"
+                                   onclick="event.preventDefault(); document.getElementById('favourite-question-{{ $question->id }}').submit();"
+                                >
+
                                     <i class="fas fa-star fa-2x"></i>
-                                    <span class="favourites-count">123</span>
+                                    <span class="favourites-count">{{ $question->favourites_count }}</span>
                                 </a>
+
+                                <form action="/questions/{{ $question->id }}/favourites"
+                                      id="favourite-question-{{ $question->id }}" method="post" style="display: none">
+
+                                    @csrf
+
+                                    @if($question->is_favourited)
+                                        @method('DELETE')
+                                    @endif
+
+                                </form>
+
                             </div>
 
                             <div class="media-body">
