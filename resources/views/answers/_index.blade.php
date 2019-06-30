@@ -77,7 +77,9 @@
                         </div>
 
                         <div class="media-body">
-                            {!! $answer->body_html !!}
+                            {{--{!! $answer->body_html !!}--}}
+                            {{ Str::limit(strip_tags($answer->body_html), 300) }}
+
                             <div class="row">
                                 <div class="col-4">
                                     <div class="ml-auto">

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Parsedown;
 
 class Question extends Model
 {
@@ -51,7 +52,7 @@ class Question extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return \Parsedown::instance()->text($this->body);
+        return clean($this->bodyHtml());
     }
 
     public function acceptBestAnswer(Answer $answer)
@@ -82,4 +83,13 @@ class Question extends Model
         return $this->favourites()->count();
     }
 
+    public function getExcerptAttribute()
+    {
+        return Str::limit(strip_tags($this->bodyHtml()), 300);
+    }
+
+    private function bodyHtml()
+    {
+        return Parsedown::instance()->text($this->body);
+    }
 }
