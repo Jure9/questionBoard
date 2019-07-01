@@ -28,77 +28,18 @@
 
                         <div class="media">
 
-                            <div class="d-flex flex-column vote-controls">
-                                <a title="This question is useful"
-                                   class="vote-up {{ Auth::guest() ? 'off' : '' }}"
-                                   onclick="event.preventDefault(); document.getElementById('up-vote-question-{{ $question->id }}').submit();"
-                                >
-                                    <i class="fas fa-caret-up fa-3x"></i>
-
-                                </a>
-
-                                <form action="/questions/{{ $question->id }}/vote"
-                                      id="up-vote-question-{{ $question->id }}" method="post" style="display: none">
-
-                                    @csrf
-
-                                    <input type="hidden" name="vote" value="1">
-
-                                </form>
-
-                                <span class="votes-count">{{ $question->votes_count }}</span>
-
-                                <a title="this question is not useful"
-                                   class="vote-down {{ Auth::guest() ? 'off' : '' }}"
-                                   onclick="event.preventDefault(); document.getElementById('down-vote-question-{{ $question->id }}').submit();"
-                                >
-                                    <i class="fas fa-caret-down fa-3x"></i>
-                                </a>
-
-                                <form action="/questions/{{ $question->id }}/vote"
-                                      id="down-vote-question-{{ $question->id }}" method="post" style="display: none">
-
-                                    @csrf
-
-                                    <input type="hidden" name="vote" value="-1">
-
-                                </form>
-
-                                <a title="Click to mark as favourite question"
-                                   class="favourite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favourited ? 'favourited' : '') }}"
-                                   onclick="event.preventDefault(); document.getElementById('favourite-question-{{ $question->id }}').submit();"
-                                >
-
-                                    <i class="fas fa-star fa-2x"></i>
-                                    <span class="favourites-count">{{ $question->favourites_count }}</span>
-                                </a>
-
-                                <form action="/questions/{{ $question->id }}/favourites"
-                                      id="favourite-question-{{ $question->id }}" method="post" style="display: none">
-
-                                    @csrf
-
-                                    @if($question->is_favourited)
-                                        @method('DELETE')
-                                    @endif
-
-                                </form>
-
-                            </div>
+                            @include('includes._vote', [
+                                'model' => $question
+                            ])
 
                             <div class="media-body">
                                 {!! $question->body_html !!}
 
                                 <div class="float-right">
-                                    <span class="text-muted">Answered {{ $question->created_at->diffForHumans() }}</span>
-                                    <div class="media mt-2">
-                                        <a href="{{ $question->user->url }}" class="pr-2">
-                                            <img src="{{ $question->user->avatar }}" alt="avatar">
-                                        </a>
-                                        <div class="media-body mt-1">
-                                            <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
-                                        </div>
-                                    </div>
+                                    @include('includes._author', [
+                                            'model' => $question,
+                                            'label' => 'asked'
+                                    ])
                                 </div>
                             </div>
 

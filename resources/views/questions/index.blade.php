@@ -87,7 +87,7 @@
                                         <small class="text-muted">{{ $question->created_at->diffForHumans() }}</small>
                                     </p>
 
-                                    <div class="excerpt">{{ $question->excerpt }}</div>
+                                    {{ Str::limit($question->body, 250) }}
 
                                 </div>
                             </div>

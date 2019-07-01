@@ -13,73 +13,12 @@
 
                     <div class="media">
 
-                        <div class="d-flex flex-column vote-controls">
-                            <a title="This answer is useful"
-                               class="vote-up {{ Auth::guest() ? 'off' : '' }}"
-                               onclick="event.preventDefault(); document.getElementById('up-vote-answer-{{ $answer->id }}').submit();"
-                            >
-                                <i class="fas fa-caret-up fa-3x"></i>
-
-                            </a>
-
-                            <form action="/answers/{{ $answer->id }}/vote"
-                                  id="up-vote-answer-{{ $answer->id }}" method="post" style="display: none">
-
-                                @csrf
-
-                                <input type="hidden" name="vote" value="1">
-
-                            </form>
-
-                            <span class="votes-count">{{ $answer->votes_count }}</span>
-
-                            <a title="This answer is not useful"
-                               class="vote-down {{ Auth::guest() ? 'off' : '' }}"
-                               onclick="event.preventDefault(); document.getElementById('down-vote-question-{{ $answer->id }}').submit();"
-                            >
-                                <i class="fas fa-caret-down fa-3x"></i>
-                            </a>
-
-                            <form action="/answers/{{ $answer->id }}/vote"
-                                  id="down-vote-question-{{ $answer->id }}" method="post" style="display: none">
-
-                                @csrf
-
-                                <input type="hidden" name="vote" value="-1">
-
-                            </form>
-
-                            @can('acceptBest', $answer)
-                                <a title="Mark this answer as best"
-                                   class="{{ $answer->status }} mt-2"
-                                   onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
-                                >
-                                    <i class="fas fa-check fa-2x"></i>
-                                </a>
-                                <form action="/answers/{{ $answer->id }}/accept"
-                                      id="accept-answer-{{ $answer->id }}" method="post" style="display: none">
-
-                                    @csrf
-
-                                </form>
-
-                            @else
-
-                                @if($answer->is_best)
-
-                                    <a title="Mark this answer as best"
-                                       class="{{ $answer->status }} mt-2">
-                                        <i class="fas fa-check fa-2x"></i>
-
-                                @endif
-
-                            @endcan
-                        </div>
+                        @include('includes._vote', [
+                                'model' => $answer
+                            ])
 
                         <div class="media-body">
-                            {{--{!! $answer->body_html !!}--}}
-                            {{ Str::limit(strip_tags($answer->body_html), 300) }}
-
+                            {!! $answer->body_html !!}
                             <div class="row">
                                 <div class="col-4">
                                     <div class="ml-auto">
@@ -110,16 +49,11 @@
 
                                 </div>
 
-                                <div class="col-4">
-                                    <span class="text-muted">Answered {{ $answer->created_at->diffForHumans() }}</span>
-                                    <div class="media mt-2">
-                                        <a href="{{ $answer->user->url }}" class="pr-2">
-                                            <img src="{{ $answer->user->avatar }}" alt="avatar">
-                                        </a>
-                                        <div class="media-body mt-1">
-                                            <a href="{{ $answer->user->url }}">{{ $answer->user->name }}</a>
-                                        </div>
-                                    </div>
+                                <div class="col-4 float-right">
+                                   @include('includes._author', [
+                                        'model' => $answer,
+                                        'label' => 'answered',
+                                   ])
                                 </div>
 
                             </div>
