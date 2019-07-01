@@ -37,10 +37,7 @@
             </div>
 
             <div class="col-4 float-right">
-                @include('includes._author', [
-                     'model' => $answer,
-                     'label' => 'answered',
-                ])
+                <user-info :model="{{ $answer }}" label="Answered"></user-info>
             </div>
 
         </div>

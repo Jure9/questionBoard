@@ -36,10 +36,13 @@
                                 {!! $question->body_html !!}
 
                                 <div class="float-right">
-                                    @include('includes._author', [
-                                            'model' => $question,
-                                            'label' => 'asked'
-                                    ])
+                                    {{--@include('includes._author', [--}}
+                                            {{--'model' => $question,--}}
+                                            {{--'label' => 'asked'--}}
+                                    {{--])--}}
+
+                                    <user-info :model="{{ $question }}" label="Asked"></user-info>
+
                                 </div>
                             </div>
 

@@ -12,6 +12,8 @@ class Answer extends Model
 
     protected $fillable= ['body', 'user_id'];
 
+    protected $appends= ['created_date'];
+
     public function question()
     {
         return $this->belongsTo(Question::class);
@@ -25,6 +27,11 @@ class Answer extends Model
     public function getBodyHtmlAttribute()
     {
         return clean(Parsedown::instance()->text($this->body));
+    }
+
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 
     public static function boot()
