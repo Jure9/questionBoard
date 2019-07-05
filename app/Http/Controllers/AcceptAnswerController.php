@@ -22,7 +22,11 @@ class AcceptAnswerController extends Controller
         if (request()->expectsJson())
         {
             return response()->json([
+<<<<<<< HEAD
                 'message' => "You have accepted this answer as best answer",
+=======
+                'message' => "You have accepted this answer as best answer"
+>>>>>>> rewrite/auth-logic
             ]);
         }
 
