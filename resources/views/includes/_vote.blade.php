@@ -60,11 +60,11 @@
 
     @elseif($model instanceof App\Answer)
 
-        @include('includes._acceptAnswer', [
-            'model' => $model
-        ])
+        {{--@include('includes._acceptAnswer', [--}}
+            {{--'model' => $model--}}
+        {{--])--}}
 
-
+        <accept :answer="{{ $model }}"></accept>
 
     @endif
 
