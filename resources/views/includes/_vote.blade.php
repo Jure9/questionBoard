@@ -63,13 +63,9 @@
         {{--@include('includes._acceptAnswer', [--}}
             {{--'model' => $model--}}
         {{--])--}}
-<<<<<<< HEAD
-=======
 
         <accept :answer="{{ $model }}"></accept>
->>>>>>> rewrite/auth-logic
 
-        <accept :answer=" {{ $model }} "></accept>
     @endif
 
 </div>

@@ -5290,10 +5290,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-//
-=======
->>>>>>> rewrite/auth-logic
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['answer'],
   data: function data() {
@@ -5318,11 +5314,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     canAccept: function canAccept() {
-<<<<<<< HEAD
-      return true;
-=======
       return this.authorize('accept', this.answer);
->>>>>>> rewrite/auth-logic
     },
     accepted: function accepted() {
       return !this.canAccept && this.isBest;
@@ -43086,11 +43078,7 @@ var render = function() {
     _vm.accepted
       ? _c(
           "a",
-<<<<<<< HEAD
-          { class: _vm.classes, attrs: { title: " this is best answer" } },
-=======
           { class: _vm.classes, attrs: { title: "Mark this answer as best" } },
->>>>>>> rewrite/auth-logic
           [_c("i", { staticClass: "fas fa-check fa-2x" })]
         )
       : _vm._e()
