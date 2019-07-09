@@ -28,9 +28,7 @@
 
                         <div class="media">
 
-                            @include('includes._vote', [
-                                'model' => $question
-                            ])
+                            <vote :model="{{ $question }}" name="question"></vote>
 
                             <div class="media-body">
                                 {!! $question->body_html !!}

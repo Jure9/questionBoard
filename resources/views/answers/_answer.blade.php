@@ -1,9 +1,7 @@
 <answer :answer="{{ $answer }}" inline-template>
     <div class="media post">
 
-        @include('includes._vote', [
-                'model' => $answer
-            ])
+        <vote :model="{{ $answer }}" name="answer"></vote>
 
         <div class="media-body">
 
