@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('questions', 'QuestionsController')->except('show');
 
-//Route::resource('answers', 'AnswersController');
+Route::get('questions/{question}/answers', 'AnswersController@index');
 
 Route::post('questions/{question}/answers', 'AnswersController@store');
 
