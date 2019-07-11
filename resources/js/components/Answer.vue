@@ -44,10 +44,15 @@
 </template>
 
 <script>
+    import Vote from './Vote';
+    import UserInfo from './UserInfo';
+
     export default {
         // name: "answer"
 
         props: ['answer'],
+
+        components: { Vote, UserInfo },
 
         data() {
             return {
